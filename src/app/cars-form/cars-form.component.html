@@ -1,0 +1,34 @@
+<div class="form-group">
+  <label for="car-name">Car name:</label>
+  <input 
+    type="text" 
+    class="form-control" 
+    id="car-name" 
+    aria-describedby="emailHelp" 
+    placeholder="Car name" 
+    [(ngModel)]="carName"
+    />
+</div>
+
+<div class="form-group">
+  <label for="car-model">Car model:</label>
+  <input 
+    type="text" 
+    class="form-control" 
+    id="car-model" 
+    aria-describedby="emailHelp" 
+    placeholder="Car model" 
+    [(ngModel)]="carModel"
+    />
+</div>
+
+<button 
+  type="button" 
+  class="btn btn-outline-primary"
+  (click)="onAdd()"
+  >Add Car</button>
+<button 
+  type="button" 
+  class="btn btn-outline-warning"
+  (click)="onLoad()"
+  >Load Cars</button>
