@@ -9,6 +9,8 @@ import { CarsFormComponent } from './cars-form/cars-form.component';
 import { CarComponent } from './car/car.component';
 import { carsReducer } from './redux/cars.reducer';
 import { CarsService } from './cars.service';
+import { EffectsModule } from '@ngrx/effects';
+import { CarsEffect } from './redux/cars.effect';
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import { CarsService } from './cars.service';
   imports: [
     BrowserModule,
     FormsModule,
+    EffectsModule.forRoot([CarsEffect]),
     HttpClientModule,
     StoreModule.forRoot({carPage: carsReducer})
   ],

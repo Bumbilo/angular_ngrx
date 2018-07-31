@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from './redux/app.state';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { LoadCars, AddCar } from './redux/cars.action';
+import { LoadCars, AddCar, DeleteCar, UpdateCar } from './redux/cars.action';
 import { Car } from '../app/car.model';
 
 @Injectable()
@@ -13,8 +13,12 @@ export class CarsService {
 
   constructor(private http: HttpClient, private store: Store<AppState>) { }
 
+  preloadCars() {
+    return this.http.get(CarsService.BASE_URL + 'cars');
+  }
+
   loadCars(): void {
-    this.http.get(CarsService.BASE_URL + 'cars')
+    this.preloadCars()
       .toPromise()
       .then((cars: any) => this.store.dispatch(new LoadCars(cars)));
   }
@@ -22,8 +26,24 @@ export class CarsService {
   addCar(car: Car) {
     this.http.post(CarsService.BASE_URL + 'cars', car)
       .toPromise()
+      .then((c: Car) => {
+        this.store.dispatch(new AddCar(c));
+      });
+  }
+
+  deleteCar(car: Car) {
+    this.http.delete(CarsService.BASE_URL + 'cars/' + car.id)
+      .toPromise()
+      .then((c: Car) => {
+        this.store.dispatch(new DeleteCar(car));
+      });
+  }
+
+  updateCar(car: Car) {
+    this.http.put(CarsService.BASE_URL + 'cars/' + car.id, car)
+      .toPromise()
       .then((car: Car) => {
-        this.store.dispatch(new AddCar(car));
+        this.store.dispatch(new UpdateCar(car));
       });
   }
 

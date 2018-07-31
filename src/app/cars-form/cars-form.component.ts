@@ -9,14 +9,16 @@ import { CarsService } from '../cars.service';
   styleUrls: ['./cars-form.component.css']
 })
 export class CarsFormComponent {
-  carName: string = '';
-  carModel: string = '';
-  private id: number = 2;
+  carName = '';
+  carModel = '';
+  private id = 2;
 
   constructor(private service: CarsService) { }
 
   onAdd() {
-    if (this.carModel === '' || this.carName === '') return;
+    if (this.carModel === '' || this.carName === '') {
+      return null;
+    }
 
     this.id = ++this.id;
     const date = moment().format('DD.MM.YY');
