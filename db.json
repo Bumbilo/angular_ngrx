@@ -34,6 +34,13 @@
       "model": "System",
       "isSold": false,
       "id": 7
+    },
+    {
+      "name": "AddX",
+      "date": "31.07.18",
+      "model": "AddX",
+      "isSold": false,
+      "id": 8
     }
   ]
 }
